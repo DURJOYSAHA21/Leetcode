@@ -1,33 +1,48 @@
-#include <iostream>
-#include <vector>
-using namespace std;
-
+#include<iostream>
+#include<string>
+using namespace std;    
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
-        int maxprofit=0;
-        int bestbuy=prices[0];
-
-        for(int i=1; i<prices.size(); i++)
+    bool alphanum(char c)
+    {
+        if(c>='0' && c<='9' || tolower(c)>='a' && tolower(c)<='z')
         {
-            if(prices[i]>bestbuy)
-            {
-                maxprofit=max(maxprofit,prices[i]-bestbuy);
-            }
-            else
-            {
-                bestbuy=prices[i];
-            }
-        
+            return true;
         }
-        return maxprofit;
+        return false;
+    }
+    bool isPalindrome(string str) {
         
+        int n=str.length();
+        int s=0, f=n-1;
+        while(s<f)
+        {
+            if(!alphanum(str[s]))
+            {
+                s++;
+                continue;
+            }
+            if(!alphanum(str[f]))
+            {
+                f--;
+                continue;
+            }
+            if(tolower(str[s]) != tolower(str[f]))
+            {
+                return false;
+            }
+            s++;
+            f--;
+
+           
+        }
+         return true;
     }
 };
 
 int main()
 {
     Solution s;
-    vector<int> prices = {7,1,5,3,6,4};
-    cout << s.maxProfit(prices);
+    string str = "A man, a plan, a canal: Panama";
+    cout << s.isPalindrome(str);
 }
